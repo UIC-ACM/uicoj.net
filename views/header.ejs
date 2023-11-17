@@ -6,6 +6,9 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=1200">
     <title><%= title %> - <%= syzoj.config.title %></title>
+    <% if(syzoj.config.favicon){ %>
+      <link rel="icon" href="<%= syzoj.config.favicon %>" type="image/x-icon" />
+    <% } %>
     <link href="<%- lib('semantic-ui/2.4.1/semantic.min.css') %>" rel="stylesheet">
     <link href="<%- selfLib('syntect-tomorrow.css') %>?20220512" rel="stylesheet">
     <link href="<%- selfLib('style.css') %>?20181212" rel="stylesheet">
