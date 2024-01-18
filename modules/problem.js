@@ -761,6 +761,7 @@ app.get('/problem/:id/testdata', async (req, res) => {
     if (!problem) throw new ErrorMessage('无此题目。');
     if (!await problem.isAllowedUseBy(res.locals.user)) throw new ErrorMessage('您没有权限进行此操作。');
 
+    if (!await problem.isAllowedEditBy(res.locals.user)) throw new ErrorMessage('您没有权限进行此操作。');
     let testdata = await problem.listTestdata();
     let testcases = await syzoj.utils.parseTestdata(problem.getTestdataPath(), problem.type === 'submit-answer');
 
@@ -844,6 +845,7 @@ app.get('/problem/:id/testdata/download/:filename?', async (req, res) => {
 
     if (!problem) throw new ErrorMessage('无此题目。');
     if (!await problem.isAllowedUseBy(res.locals.user)) throw new ErrorMessage('您没有权限进行此操作。');
+    if (!await problem.isAllowedEditBy(res.locals.user)) throw new ErrorMessage('您没有权限进行此操作。');
     if (typeof req.params.filename === 'string' && (req.params.filename.includes('../'))) throw new ErrorMessage('您没有权限进行此操作。)');
 
     if (!req.params.filename) {
